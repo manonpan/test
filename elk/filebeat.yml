@@ -1,0 +1,18 @@
+filebeat.inputs:
+- type: filestream
+  id: system-log
+  paths:
+    - /var/log/getMenu/*.log
+  fields:
+    log_type: getMenu
+
+- type: filestream
+  id: system-log
+  paths:
+    - /var/log/getAllsubcateByFilter/*.log
+  fields:
+    log_type: getAllsubcateByFilter
+
+output.logstash:
+  hosts: ["<IP_ADDRESS_LOGSTASH>:5044"]
+  index: "logs-%{[fields.log_type]}-%{+yyyy.MM.dd}"
